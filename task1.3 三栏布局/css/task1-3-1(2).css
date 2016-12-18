@@ -1,0 +1,53 @@
+/*
+*浮动定位法
+*该方法的html中间块必须放在最后
+*/
+*{
+	margin: 0;
+	padding: 0px;
+}
+
+.box{
+	margin: 20px;
+	background-color: #eee;
+	overflow: hidden;
+}
+div{
+	padding: 20px;
+	border: 1px solid #999;
+}
+ul{
+	list-style: none;
+}
+li{
+	height: 80px;
+	margin-top: 20px;
+}
+#first-li{
+	margin-top: 0;
+}
+
+.left{
+	float: left;
+	position: relative;
+	width: 160px;
+}
+.right{
+	float: right;
+	width: 80px;
+}
+
+.left p{
+	position: absolute;
+	top:20px;
+	left: 120px;
+	padding: 0;
+}
+
+.center{
+	/*min-width: 300px;*/
+	/*margin: 0 140px 0 220px;/*留出左右的宽度*/
+	margin: 0 140px 0 220px;
+
+
+}

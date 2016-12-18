@@ -1,0 +1,52 @@
+/*
+*圣杯布局法
+*原理是margin负值法。使用圣杯布局首先需要在center元素外部包含一个div，
+*包含div需要设置float属性使其形成一个BFC，并设置宽度，并且这个宽度要和
+left块的margin负值进行配合。
+*/
+*{
+	margin: 0;
+	padding: 0px;
+}
+
+.box{
+	margin: 20px;
+	background-color: #eee;
+	overflow: hidden;
+}
+div{
+	padding: 20px;
+	border: 1px solid #999;
+}
+ul{
+	list-style: none;
+}
+li{
+	height: 80px;
+	margin-top: 20px;
+}
+#first-li{
+	margin-top: 0;
+}
+
+.left{
+	position: relative;
+	width: 160px;
+}
+.right{
+
+	width: 80px;
+}
+
+.left p{
+	position: absolute;
+	top:20px;
+	left: 120px;
+	padding: 0;
+}
+
+.center{
+	/*margin: 0 140px 0 220px;*/
+
+
+}
