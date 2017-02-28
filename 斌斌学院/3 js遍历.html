@@ -38,17 +38,16 @@ function getData() {
   /*
   coding here
   */
-  var data = [],
-    detail = []
-    city = [];
+  var data = [];
+    
   var parentNode = document.getElementById('source').getElementsByTagName("li");
   for(var i = 0; i < parentNode.length; i++)
   {
-    city = parentNode.toString().split("空气质量：");
     //console.log(city[0]);
-    detail[0] = city[0].value;
-    detail[1] = parentNode.getElementsByTagName('b').innerHTML;
-    console.log(detail[0]+" " +detail[1]);
+    var b = parentNode[i].firstElementChild;
+    var bText = b.firstChild.nodeValue;
+    var liText =  parentNode[i].firstChild.nodeValue.slice(0,2);
+    data.push([liText,bText]);
   }
   
   /*
@@ -69,7 +68,11 @@ function getData() {
  * 返回一个排序后的数组
  */
 function sortAqiData(data) {
+  data = data.sort(function(x,y){
+    return x[1]-y[1];
+  });
 
+  return data;
 }
 
 /**
@@ -78,6 +81,20 @@ function sortAqiData(data) {
  * 格式见ul中的注释的部分
  */
 function render(data) {
+  var count = 0;
+  var detail = ['一','二','三','四','五','六','七'];
+  var parentNode = document.getElementById('resort');
+  for(var i = data.length-1; i >= 0; i--){
+      
+      
+      var newNodeLi = document.createElement('li');
+      var newNodeB = document.createElement('b');
+      newNodeB.innerHTML = data[i][1];
+      newNodeLi.innerHTML = "第"+detail[count++]+"名:"+data[i][0]+"空气质量：";
+      newNodeLi.appendChild(newNodeB);
+      parentNode.appendChild(newNodeLi);
+
+  }
 
 }
 
@@ -90,7 +107,7 @@ function btnHandle() {
 function init() {
 
   var btn = document.getElementById('sort-btn');// 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
-  btn.addEventListener('click',getData);
+  btn.addEventListener('click',btnHandle);
 }
 
 init();
