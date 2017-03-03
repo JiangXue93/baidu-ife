@@ -73,6 +73,7 @@ function deleteElement(event){
 		}else if(event.target.id = "right-out"){
 			var child = queue.lastChild;	
 		}
+		alert("你删除了"+child.innerHTML);
 		queue.removeChild(child);
 	}else{
 		alert("队列为空！");
