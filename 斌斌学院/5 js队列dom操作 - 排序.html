@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js队列</title>
+</head>
+<style type="text/css">
+#Queue{
+
+	margin: 10px;
+	padding: 10px;
+	background-color: #ccc;
+}
+.bar{
+
+}
+</style>
+<body>
+<div>
+	<input type="text" id="element-in">
+	<button id="left-in">左侧插入</button>
+	<button id="left-out">左侧删除</button>
+	<button id="right-out">右侧删除</button>
+	<button id="right-in">右侧插入</button>
+	<button id="sort">单步冒泡排序</button>	
+</div>
+<div id="Queue"></div>
+</body>
+<script type="text/javascript">
+var queue = document.getElementById("Queue");
+var leftIn = document.getElementById("left-in");
+var leftOut = document.getElementById("left-out");
+var rightIn = document.getElementById("right-in");
+var rightOut = document.getElementById("right-out");
+var sortBtn = document.getElementById("sort");
+
+window.onload = function(){
+	leftIn.addEventListener('click',function(){
+		addElement();	
+	});
+	rightIn.addEventListener('click',function(){
+		addElement();	
+	});
+	leftOut.addEventListener('click',function(){
+		deleteElement();	
+	});
+	rightOut.addEventListener('click',function(){
+		deleteElement();	
+	});
+	sortBtn.addEventListener('click',function(){
+		getBars();	
+	});
+
+};
+//插入元素-优化
+function addElement(event){
+	event = event || window.event;
+	console.log();
+	var elementIn = document.getElementById("element-in");
+	if(check(elementIn)){
+		var newNode = "<span style='background-color:red;margin-right:5px;margin-bottom:0;display:inline-block;line-height:25px;width:35px;text-align:center;vertical-align:bottom;height:"+elementIn.value*3+"px;'>"+Number(elementIn.value)+"</span>";
+		if(event.target.id == "left-in"){
+			queue.innerHTML = newNode + queue.innerHTML;
+		}else if(event.target.id == "right-in"){
+			queue.innerHTML =  queue.innerHTML + newNode;
+		}
+		elementIn.value = null;
+	}else{
+		elementIn.value = null;
+	}	
+}
+
+//删除元素-优化
+function deleteElement(event){
+	event = event || window.event;
+	if(queue.hasChildNodes())
+	{
+		if(event.target.id == "left-out"){
+			var child = queue.firstChild;
+			alert("你删除了"+child.innerHTML);
+			queue.removeChild(child);
+		}else{//(event.target.id = "right-out")
+		
+			var child2 = queue.lastChild;	
+			alert("你删除了"+child2.innerHTML);
+			queue.removeChild(child2);
+		}
+		
+	}else{
+		alert("队列为空！");
+	}
+}
+//检测input值为数字
+function check(element){
+	var re =  /^[0-9]+.?[0-9]*$/;
+	if(re.test(element.value) && element.value<=100 && element.value>=10)
+		return true;
+	else
+	{
+		alert("请输入10-100的数字");
+		return false;
+	}
+}
+//获取所有的bar
+function getBars(){
+	var bars = document.getElementsByTagName("span");
+
+	for(let i = 0; i<bars.length-1; i++)
+	{		
+		if(bars[i].innerHTML>bars[i+1].innerHTML){
+			console.log("bef:"+bars[i].innerHTML+" "+bars[i+1].innerHTML);
+			
+			//bars[i]与bars[i+1]换位置
+			// var temp = bars[i].innerHTML;
+			// bars[i].innerHTML = bars[i+1].innerHTML;
+			// bars[i+1].innerHTML = temp;
+			// bars[i].style.height = bars[i].innerHTML*3 +"px";//修改css
+			// bars[i+1].style.height = bars[i+1].innerHTML*3+"px";
+
+			bars[i].parentNode.insertBefore(bars[i+1],bars[i]);//(src,target)
+			console.log("aft:"+bars[i].innerHTML+" "+bars[i+1].innerHTML);	
+		}
+		
+	}
+
+}
+
+
+
+
+// //操作元素左侧加入
+// function addL(){
+// 	var elementIn = document.getElementById("element-in");
+// 	if(check(elementIn)){
+// 		var newNode = "<span style='background-color:red;margin:5px 5px;display:inline-block;height:30px;line-height:30px;'>"+elementIn.value+"</span>";
+// 		queue.innerHTML = newNode + queue.innerHTML;
+// 		elementIn.value = null;
+// 	}else{
+// 		alert("请输入数字"); 
+// 	}	
+// }
+// //操作元素右侧加入
+// function addR(){
+// 	var elementIn = document.getElementById("element-in");
+// 	if(check(elementIn)){
+// 		var newNode = "<span style='background-color:red;margin:5px 5px;display:inline-block;height:30px;line-height:30px;'>"+elementIn.value+"</span>";
+// 		queue.innerHTML =  queue.innerHTML + newNode;
+// 		elementIn.value = null;
+// 	}else{
+// 		alert("请输入数字"); 
+// 	}	
+// }
+// //操作元素左侧删除
+// function deleteL(){
+// 	if(queue.hasChildNodes())
+// 	{
+// 		var child = queue.firstChild;
+// 		queue.removeChild(child);
+// 	}else{
+// 		alert("队列为空！");
+// 	}
+	
+// }
+// //操作元素右侧删除
+// function deleteR(){
+// 	if(queue.hasChildNodes())
+// 	{
+// 		var child = queue.lastChild;
+// 		queue.removeChild(child);
+// 	}else{
+// 		alert("队列为空！");
+// 	}
+	
+// }
+
+
+
+
+
+</script>
+</html>
