@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ife-js</title>
+<style type="text/css">
+#result{
+	height: 100px;
+	width: 50%;
+	background-color: #ccc;
+}	
+#im-info,{
+	display: inline;
+}
+</style>
+</head>
+<body>
+<textarea id="base-info" rows="10" cols="50">打发，阿道夫。adfs，，，，..asds,,sdas,...asd///asd"
+asdf
+ddd</textarea>
+<input type="text" id="im-info">
+<button id="search">查找</button>
+<div id="result"></div>
+
+<script type="text/javascript">
+var unitInfo = "";
+var baseInfo = document.getElementById("base-info");
+var result = document.getElementById("result");
+var imInfo = document.getElementById("im-info");
+
+window.onload=function(){
+	var arr,arrCheck = [];//arr存储字符串 arrcheck存储该字符是否匹配目标字符串
+	search.addEventListener('click',function(){
+		arr = toArray(baseInfo.value);
+		for(var i = 0; i<arr.length;i++){
+			if(arr[i].indexOf(imInfo.value) != -1){
+				arrCheck[i]=1;
+			}else{
+				arrCheck[i]=0;
+			}
+		show();	
+		}
+		console.log(arr);
+		console.log(arrCheck);
+
+		//console.log(toString(array));
+		//toEasyString();
+	});
+	//匹配字符串标红
+	function show(){
+		result.innerHTML = "";
+		for(var i = 0; i<arrCheck.length; i++){
+			if(arrCheck[i] == 0){
+				result.innerHTML = result.innerHTML + arr[i] + " ";
+			}else{
+				var hlInfo = '<span style="background-color:red;">'+arr[i]+'</span>';
+				result.innerHTML = result.innerHTML + hlInfo + " ";
+			}
+		}
+	}
+	
+}
+
+//将textArea里的字符串提取出来
+function toArray(ele){
+	var array = [];
+	var reg = /[^\u4e00-\u9fa5_a-zA-Z0-9]+/g; 
+	//+一个或者多个；*0个或者多个；正则工具：http://tools.jb51.net/regex/javascript
+	var test = ele;
+	var info = test.replace(reg," ");
+
+	array = info.split(" ");
+	return array;
+}
+</script>	
+</body>
+</html>
