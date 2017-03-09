@@ -93,7 +93,7 @@ function deleteElement(event){
 //检测input值为数字
 function check(element){
 	var re =  /^[0-9]+.?[0-9]*$/;
-	if(re.test(element.value) && element.value<=100 && element.value>=10)
+	if(re.test(element.value) && element.value<=100 && element.value>=0)
 		return true;
 	else
 	{
@@ -107,7 +107,7 @@ function getBars(){
 
 	for(let i = 0; i<bars.length-1; i++)
 	{		
-		if(bars[i].innerHTML>bars[i+1].innerHTML){
+		if(bars[i].innerHTML-0 > bars[i+1].innerHTML-0){
 			console.log("bef:"+bars[i].innerHTML+" "+bars[i+1].innerHTML);
 			
 			//bars[i]与bars[i+1]换位置
