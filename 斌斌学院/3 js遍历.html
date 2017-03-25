@@ -17,11 +17,6 @@
   </ul>
 
   <ul id="resort">
-    <!-- 
-    <li>第一名：北京空气质量：<b>90</b></li>
-    <li>第二名：北京空气质量：<b>90</b></li>
-    <li>第三名：北京空气质量：<b>90</b></li>
-     -->
 
   </ul>
 
@@ -49,14 +44,7 @@ function getData() {
     var liText =  parentNode[i].firstChild.nodeValue.slice(0,2);
     data.push([liText,bText]);
   }
-  
-  /*
-  data = [
-    ["北京", 90],
-    ["北京", 90]
-    ……
-  ]
-  */
+
 
   return data;
 
